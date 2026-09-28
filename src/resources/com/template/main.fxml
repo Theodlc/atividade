@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+
+<StackPane fx:id="root" prefHeight="660.0" prefWidth="1160.0"
+           stylesheets="@style.css" styleClass="app-shell"
+           xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.template.controller.MainController">
+
+    <Region mouseTransparent="true" styleClass="backdrop-overlay" />
+
+    <ScrollPane fitToWidth="true" hbarPolicy="AS_NEEDED" maxHeight="Infinity"
+                maxWidth="Infinity" pannable="true"
+                styleClass="page-scroll" vbarPolicy="AS_NEEDED"
+                StackPane.alignment="CENTER">
+      <content>
+       <VBox maxWidth="1110.0" spacing="12.0" styleClass="page-content">
+        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="top-bar">
+            <StackPane minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0"
+                       styleClass="avatar-frame">
+                <ImageView fitHeight="42.0" fitWidth="42.0" preserveRatio="true"
+                           smooth="true" styleClass="avatar-image">
+                    <image>
+                        <Image url="@icon.png" />
+                    </image>
+                </ImageView>
+            </StackPane>
+
+            <VBox spacing="1.0">
+                <Label text="ASTRAL EXPRESS  /  DATA BANK" styleClass="eyebrow" />
+                <Label text="Arquivo de Personagens" styleClass="screen-title" />
+                <Label text="Registre ecos, elementos e habilidades do universo estelar."
+                       styleClass="screen-subtitle" />
+            </VBox>
+
+        </HBox>
+
+        <HBox spacing="14.0" VBox.vgrow="ALWAYS">
+            <VBox minWidth="250.0" prefWidth="260.0" spacing="4.0" styleClass="glass-card, form-card">
+                <VBox spacing="1.0">
+                    <Label text="NOVO REGISTRO" styleClass="section-kicker" />
+                    <Label text="Dados do arquivo" styleClass="section-title" />
+                </VBox>
+
+                <Separator />
+
+                <VBox spacing="2.0">
+                    <Label text="IDENTIFICADOR" styleClass="field-label" />
+                    <TextField fx:id="txtId" editable="false"
+                               promptText="Gerado automaticamente" styleClass="form-input, readonly-input" />
+                </VBox>
+
+                <VBox spacing="2.0">
+                    <Label text="NOME" styleClass="field-label" />
+                    <TextField fx:id="txtNome" promptText="Ex.: March 7th"
+                               styleClass="form-input" />
+                </VBox>
+
+                <HBox spacing="12.0">
+                    <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                        <Label text="ELEMENTO" styleClass="field-label" />
+                        <ComboBox fx:id="comboElemento" maxWidth="Infinity"
+                                  promptText="Selecione" styleClass="form-combo">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Físico" />
+                                    <String fx:value="Fogo" />
+                                    <String fx:value="Gelo" />
+                                    <String fx:value="Raio" />
+                                    <String fx:value="Vento" />
+                                    <String fx:value="Quântico" />
+                                    <String fx:value="Imaginário" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </VBox>
+
+                    <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                        <Label text="RARIDADE" styleClass="field-label" />
+                        <ComboBox fx:id="comboRaridade" maxWidth="Infinity"
+                                  promptText="Selecione" styleClass="form-combo">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="3 Estrelas" />
+                                    <String fx:value="4 Estrelas" />
+                                    <String fx:value="5 Estrelas" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="2.0" VBox.vgrow="ALWAYS">
+                    <Label text="EFEITO / HABILIDADE" styleClass="field-label" />
+                    <TextArea fx:id="txtEfeito" minHeight="44.0" prefHeight="50.0"
+                              promptText="Descreva o efeito com pelo menos 10 caracteres..."
+                              wrapText="true" styleClass="form-area" VBox.vgrow="ALWAYS" />
+                </VBox>
+
+                <Label fx:id="lblMensagem" minHeight="14.0" text=""
+                       wrapText="true" styleClass="feedback-label" />
+
+                <VBox spacing="4.0">
+                    <Button fx:id="btnSalvar" maxWidth="Infinity"
+                            onAction="#onBotaoSalvarClick" text="✦  REGISTRAR NO ARQUIVO"
+                            styleClass="action-button, primary-button" />
+                    <HBox spacing="4.0">
+                        <Button fx:id="btnEditar" disable="true" maxWidth="Infinity"
+                                onAction="#onBotaoEditarClick" text="ATUALIZAR"
+                                styleClass="action-button, secondary-button" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="btnExcluir" disable="true" maxWidth="Infinity"
+                                onAction="#onBotaoExcluirClick" text="EXCLUIR"
+                                styleClass="action-button, danger-button" HBox.hgrow="ALWAYS" />
+                        <Button maxWidth="Infinity" onAction="#onBotaoLimparClick"
+                                text="LIMPAR" styleClass="action-button, ghost-button"
+                                HBox.hgrow="ALWAYS" />
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <VBox spacing="15.0" styleClass="glass-card, data-card" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT">
+                    <VBox spacing="3.0">
+                        <Label text="REGISTROS SINCRONIZADOS" styleClass="section-kicker" />
+                        <Label text="Banco de dados astral" styleClass="section-title" />
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label text="SELECIONE UMA LINHA PARA EDITAR" styleClass="table-hint" />
+                </HBox>
+
+                <Separator />
+
+                <TableView fx:id="tabelaItens" onMouseClicked="#onTabelaClicada"
+                           styleClass="archive-table" VBox.vgrow="ALWAYS">
+                    <placeholder>
+                        <VBox alignment="CENTER" spacing="8.0">
+                            <Label text="✧" styleClass="empty-icon" />
+                            <Label text="Nenhum registro" styleClass="empty-title" />
+                            <Label text="Cadastre um item no painel à esquerda."
+                                   styleClass="empty-subtitle" />
+                        </VBox>
+                    </placeholder>
+                    <columns>
+                        <TableColumn fx:id="colId" maxWidth="55.0" minWidth="36.0" text="ID" />
+                        <TableColumn fx:id="colNome" minWidth="80.0" text="NOME" />
+                        <TableColumn fx:id="colElemento" minWidth="70.0" text="ELEMENTO" />
+                        <TableColumn fx:id="colRaridade" minWidth="65.0" text="RARIDADE" />
+                        <TableColumn fx:id="colEfeito" minWidth="130.0" text="EFEITO / HABILIDADE" />
+                    </columns>
+                </TableView>
+
+                <HBox alignment="CENTER_LEFT" spacing="8.0" styleClass="footer-note">
+                    <Label text="◇" styleClass="footer-glyph" />
+                    <Label text="PostgreSQL • localhost:5432/bd_honkai"
+                           styleClass="footer-text" />
+                </HBox>
+            </VBox>
+        </HBox>
+       </VBox>
+      </content>
+    </ScrollPane>
+</StackPane>
